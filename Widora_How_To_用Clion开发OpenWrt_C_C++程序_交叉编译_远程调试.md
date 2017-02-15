@@ -14,7 +14,8 @@ This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unpo
 ## 2 版本历史
 | 版本 | 日期 | 作者 | 更改记录 |
 |--------|--------|--------|--------|
-|    v0.1    |    15 Feb 2017    |   zymxjtu   (yf添加Clion操作说明)    |    第一版    |
+|    v0.1    |    15 Feb 2017    |   zymxjtu    |    第一版    |
+|        |        |   (yf添加Clion操作说明)    |        |
 
 ## 3 介绍
 这篇文档解释了怎样使用Clion与OpenWrt的交叉编译工具链；怎样设置Eclipse做远程目标设备代码级别的调试和远程操控。
