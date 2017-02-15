@@ -195,6 +195,8 @@ include_directories( "~/openwrt_widora/build_dir/target-mipsel_24kec+dsp_uClibc-
 
 ##### 5.1.2.1 启动远程目标设备的gdbserver（Widora）
 
+###### 方法1, 手动在widora运行gdbserver:
+
 如果你的程序编译成功，你需要在你的目标设备上执行你所写的程序. Clion没有与eclipse类似的自动化远程访问和远程调试功能.
 
 所以需要手动用Xftp等工具,sftp连接到widora, 然后把程序拷贝到widora, 并且手动运行gdbserver.
@@ -209,6 +211,42 @@ include_directories( "~/openwrt_widora/build_dir/target-mipsel_24kec+dsp_uClibc-
 
   ![1.1.000](picture/clion_07.png)
 
+###### 方法2, 利用Clion的external tools工具, 自动化启动gdbserver:
+
+现在pc安装lftp和sshpass用于非交互式sftp和ssh登录:
+
+```
+sudo apt-get install lftp
+sudo apt-get install sshpass
+```
+
+在项目目录建立脚本 RemoteDebug.sh , 拷贝以下内容并保存:
+
+```
+#!/bin/sh
+HOST=192.168.99.1
+USER=root
+PASS=xxxxxx
+echo "Starting to sftp..."
+lftp -u ${USER},${PASS} sftp://${HOST} <<EOF
+cd /tmp
+mput ./cmake-build-debug/HelloWidora
+bye
+EOF
+echo "done"
+
+echo "Starting to ssh..."
+sshpass -p ${PASS} ssh ${USER}@${HOST} "gdbserver :2345 /tmp/HelloWidora" &
+sleep 3
+echo "done"
+```
+
+选择菜单 `settings > Tools > External Tools` 按左上角加号, 添加工具.
+
+设置参数如下:
+
+  ![1.1.000](picture/clion_11.png)
+
 ##### 5.1.2.2 配置Clion的Debug选项
 
 选择菜单 “Run > Edit Configrations”, 按左上角绿色加号, 添加远程调试.
@@ -221,6 +259,13 @@ symbol file 是编译出的可执行程序.
 Path mappings 分别是widora程序路径, 和pc工程路径
 
   ![1.1.000](picture/clion_08.png)
+
+如果上面启动gdbserver使用脚本的话, 现在还需要在 Before launch 添加上面制作的 External Tools.
+
+点击绿色加号 > Run External Tools > RemoteDebug
+
+  ![1.1.000](picture/clion_12.png)
+
 
 选择 “Run > Debug”, 提示输入密码时请输入widora root 密码.
 
@@ -238,5 +283,3 @@ Path mappings 分别是widora程序路径, 和pc工程路径
 ## 6 总结
 
 恭喜，你现在已经有一个完整的OpenWrt的IDE开发环境了！你可以在 Clion 里面开发你的OpenWrt C/C++ 程序，交叉编译它，设置断点，远程调试。
-
-至于widora上的手动操作, 确实很不方便. 希望有能力者, 可以编写Clion插件解决这个问题.
