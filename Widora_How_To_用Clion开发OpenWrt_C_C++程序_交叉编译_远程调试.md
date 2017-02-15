@@ -7,12 +7,14 @@
 ## 1 版权
 本文基于zymxjtu的 <用Eclipse开发OpenWrt C/C++程序 交叉编译 远程调试> 的工作成果。 更新了Clion的操作方式。
 
+https://github.com/zym060050/Widora_Doc/blob/master/How_To/Widora_How_To_%E7%94%A8Eclipse%E5%BC%80%E5%8F%91OpenWrt_C_C%2B%2B%E7%A8%8B%E5%BA%8F_%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91_%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95.md
+
 This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
 
 ## 2 版本历史
 | 版本 | 日期 | 作者 | 更改记录 |
 |--------|--------|--------|--------|
-|    v0.1    |    15 Feb 2017    |   yf    |    第一版    |
+|    v0.1    |    15 Feb 2017    |   zymxjtu(yf添加Clion操作)    |    第一版    |
 
 ## 3 介绍
 这篇文档解释了怎样使用Clion与OpenWrt的交叉编译工具链；怎样设置Eclipse做远程目标设备代码级别的调试和远程操控。
