@@ -90,15 +90,7 @@ https://dev.openwrt.org/changeset/46298/trunk/toolchain/gdb
 sudo apt-get install libexpat1-dev
 ```
 
-我在此处修改后仍然出错.
-
-采用一下方法解决:
-
-1. ~/openwrt_widora/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/gdb-7.8/gdb/remote.c
-注释掉  if (buf_len < 2 * rsa->sizeof_g_packet)     对buf_len的判断
-
-
-2. 注意改makefile或者代码之后先运行 make toolchain/gdb/clean   再重新编译
+注意:  改makefile或者代码之后先运行 make toolchain/gdb/clean   再重新make/toolchain/install编译
 
 
 在Terminal里面cd到Widora源码的根目录，然后执行 “make menuconfig”:
